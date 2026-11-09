@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <math.h>
 
 // https://leetcode.com/problems/rabbits-in-forest/
 
@@ -24,11 +25,7 @@ class Solution {
             if (ele.second <= ele.first + 1) {
                 ans += (ele.first + 1);
             } else {
-                double temp = (double)ele.second / (ele.first + 1);
-                if (temp > (int)temp) {
-                    temp += 1;
-                }
-                temp = (int)temp;
+                double temp = ceil((double)ele.second / (ele.first + 1));
                 ans += ((ele.first + 1) * temp);
             }
         }
