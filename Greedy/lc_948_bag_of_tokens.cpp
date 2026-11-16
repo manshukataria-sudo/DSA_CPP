@@ -4,7 +4,7 @@
 // https://leetcode.com/problems/bag-of-tokens/
 
 /* 
-TC = O(N)
+TC = O(NlogN)
 SC = O(1)
 */
 using namespace std;
