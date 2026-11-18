@@ -12,6 +12,9 @@ class Solution {
     int numRescueBoats(vector<int>& people, int limit) {
         int n = people.size();
 
+        /* 
+        try to make couple of max weight and min weight persons
+         */
         sort(people.begin(), people.end());
         int i = 0, j = n - 1;
         int boat_count = 0;
