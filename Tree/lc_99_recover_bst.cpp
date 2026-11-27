@@ -5,8 +5,8 @@ using namespace std;
 
 //   Definition for a binary tree node.
 /*
-TC = O(nlogn)
-SC = O(n)
+TC = O(n)
+SC = O(Height)
 */
 
 // https://leetcode.com/problems/recover-binary-search-tree/description/
@@ -21,28 +21,32 @@ struct TreeNode {
 
 class Solution {
    public:
-    void f(TreeNode* root, vector<int>& inorder) {
+    void f(TreeNode* root, TreeNode*& first, TreeNode*& second, TreeNode*& prev) {
         if (!root) {
             return;
         }
-        f(root->left, inorder);
-        inorder.push_back(root->val);
-        f(root->right, inorder);
-    }
-    void recover(TreeNode* root, vector<int>& inorder, int& i) {
-        if (!root) {
-            return;
+        f(root->left, first, second, prev);
+        if (prev && prev->val > root->val) {
+            if (!first) {
+                first = prev;
+                second = root;
+            } else {
+                second = root;
+            }
         }
-        recover(root->left, inorder, i);
-        root->val = inorder[i];
-        i += 1;
-        recover(root->right, inorder, i);
+        prev = root;
+        f(root->right, first, second, prev);
     }
+
     void recoverTree(TreeNode* root) {
-        vector<int> inorder;
-        f(root, inorder);
-        sort(inorder.begin(), inorder.end());
-        int i = 0;
-        recover(root, inorder, i);
+        TreeNode* prev = NULL;
+        TreeNode* first = NULL;
+        TreeNode* second = NULL;
+
+        f(root, first, second, prev);
+
+        int temp = first->val;
+        first->val = second->val;
+        second->val = temp;
     }
 };
