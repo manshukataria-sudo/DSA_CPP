@@ -3,7 +3,12 @@
 
 using namespace std;
 
+// https://leetcode.com/problems/search-in-a-binary-search-tree/
 //  * Definition for a binary tree node.
+/* 
+TC = O(logn)
+SC = O(Height of tree)
+*/
 struct TreeNode {
     int val;
     TreeNode* left;
